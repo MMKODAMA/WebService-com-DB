@@ -16,9 +16,14 @@ use App\Http\Controllers\Api\ProdutoController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware("localization")->group(function(){
+
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::apiResource('categorias',CategoriaController::class);
+    Route::apiResource('produtos',ProdutoController::class);
+
 });
 
-Route::apiResource('categorias',CategoriaController::class);
-Route::apiResource('produtos',ProdutoController::class);
